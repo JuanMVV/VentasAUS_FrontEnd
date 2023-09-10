@@ -19,6 +19,8 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
 
   category?: Category;
 
+  
+
 
   constructor(private route: ActivatedRoute,
     private categoryService: CategoryService,
