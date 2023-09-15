@@ -13,8 +13,12 @@ export class BlogPostService {
 
   createBlogPost(data: AddBlogPost): Observable<BlogPost> {
     return this.http.post<BlogPost>(
-      'https://localhost:7296/api/blogpost',
+      'https://localhost:7296/api/blogposts',
       data
     );
+  }
+
+  getAllBlogPosts(): Observable<BlogPost[]> {
+    return this.http.get<BlogPost[]>('https://localhost:7296/api/blogposts');
   }
 }
