@@ -16,6 +16,7 @@
           <th>Author</th>
           <th>Is Visible?</th>
           <th>Categories</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -29,6 +30,15 @@
             <span *ngFor="let category of blogPost.categories">
               <span class="badge bg-secondary me-2">{{ category.name }}</span>
             </span>
+          </td>
+
+          <!-- creamos un espacio para poner el boton editar -->
+          <td>
+            <a
+              class="btn btn-light"
+              [routerLink]="['/admin/blogposts', blogPost.id]"
+              >Edit</a
+            >
           </td>
         </tr>
       </tbody>
