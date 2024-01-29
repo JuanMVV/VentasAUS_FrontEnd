@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BlogPostService } from '../../blog-post/services/blog-post.service';
+import { Observable } from 'rxjs';
+import { BlogPost } from '../../blog-post/models/blog-post.model';
 
 @Component({
   selector: 'app-blog-details',
@@ -10,20 +13,27 @@ export class BlogDetailsComponent implements OnInit{
 
 
   url: string | null = null;
+  blogPost$? : Observable<BlogPost>;
 
-  constructor(private route: ActivatedRoute){
+  constructor(private route: ActivatedRoute,
+    private blogPostService: BlogPostService){
 
   }
   ngOnInit(): void {
     this.route.paramMap
     .subscribe({
       next: (params) => {
-        params.get('url');
+        this.url = params.get('url');
       }
     });
 
 
-    //fetch blog details by url
+    //fetch blog details by url, cargamos el observable en caso de q tenga datos y luego lo usamos en el html
+    if(this.url){
+      this.blogPost$ = this.blogPostService.getBlogPostByUrlHandle(this.url);      
+    }
+
+
 
 
 

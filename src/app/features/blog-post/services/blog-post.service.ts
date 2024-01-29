@@ -29,6 +29,19 @@ export class BlogPostService {
     );
   }
 
+
+  //creamos el servicio para poder llamar por el urlhandle y no el id
+  getBlogPostByUrlHandle(urlHandle: string): Observable<BlogPost> {
+    return this.http.get<BlogPost>(
+      `https://localhost:7296/api/blogposts/${urlHandle}`
+    );
+  }
+
+
+
+
+
+
   //creamos un nuevo servicio para las ediciones
   updateBlogPost(
     id: string,
