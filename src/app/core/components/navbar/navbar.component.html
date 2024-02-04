@@ -9,6 +9,10 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
+
+
+        <!-- modificamos el menu principal para solo mostrar las acciones segun el usuario -->
+        <ng-container *ngIf="user !== undefined && user?.roles?.includes('Writer')">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
@@ -21,11 +25,28 @@
             <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
           </ul>
         </li>
+      </ng-container>
+
+
+
       </ul>
 
       <!-- nueva parte para el boton de login -->
       <div class="d-flex">
+        <!-- <a [routerLink]="['/login']" class="btn btn-primary">Login</a> -->
+        <ng-container *ngIf="user === undefined; else showLogout">
+        <!-- motramos el boton -->
         <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
+        </ng-container>
+
+        <ng-template #showLogout>
+          <div class="d-flex align-items-center">
+            <span>{{user?.email}}</span>
+            <button class="btn btn-primary ms-3" (click)="onLogout()">Logout</button>
+          </div>
+        </ng-template>
+
+
       </div>
 
     </div>
