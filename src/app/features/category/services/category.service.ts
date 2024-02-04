@@ -5,13 +5,15 @@ import { HttpClient } from '@angular/common/http';
 import { Category } from '../models/category.model';
 import { UpdateCategoryRequest } from '../models/update-category-request.model';
 import { environment } from 'src/environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private cookieService: CookieService) { }
 
   addCategory(model: AddCategoryRequest): Observable<void> {
     return this.http.post<void>('https://localhost:7296/api/categories', model);
@@ -32,8 +34,18 @@ export class CategoryService {
   //   return this.http.get<Category>(`${environment.apiBaseUrl}/api/categories/${id}`);
   // }
 
+  //estos metodos ahora necesitan el jwt token para poder aceptarlos el back  
   updateCategory(id: string, updateCategoryRequest: UpdateCategoryRequest): Observable<Category> {
+    //1er forma de hacerlo agregar el headers a la ruta (no es lo mejor por que hay q repetir en todos los servicios que lo necesiten)
+    // return this.http.put<Category>(`https://localhost:7296/api/categories/${id}`, updateCategoryRequest,    
+    //   {headers: {
+    //     'Authorization': this.cookieService.get('Authorization')
+    //   }});
+
     return this.http.put<Category>(`https://localhost:7296/api/categories/${id}`, updateCategoryRequest);
+
+
+    
   }
 
   deleteCategory(id: string) : Observable<Category>{
