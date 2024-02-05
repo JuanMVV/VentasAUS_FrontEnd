@@ -14,7 +14,7 @@ export class BlogPostService {
 
   createBlogPost(data: AddBlogPost): Observable<BlogPost> {
     return this.http.post<BlogPost>(
-      'https://localhost:7296/api/blogposts',
+      'https://localhost:7296/api/blogposts?addAuth=true',
       data
     );
   }
@@ -29,7 +29,6 @@ export class BlogPostService {
     );
   }
 
-
   //creamos el servicio para poder llamar por el urlhandle y no el id
   getBlogPostByUrlHandle(urlHandle: string): Observable<BlogPost> {
     return this.http.get<BlogPost>(
@@ -37,25 +36,20 @@ export class BlogPostService {
     );
   }
 
-
-
-
-
-
   //creamos un nuevo servicio para las ediciones
   updateBlogPost(
     id: string,
     updatedBlogPost: UpdateBlogPost
   ): Observable<BlogPost> {
     return this.http.put<BlogPost>(
-      `https://localhost:7296/api/blogposts/${id}`,
+      `https://localhost:7296/api/blogposts/${id}?addAuth=true`,
       updatedBlogPost
     );
   }
 
   deleteBlogPost(id: string): Observable<BlogPost> {
     return this.http.delete<BlogPost>(
-      `https://localhost:7296/api/blogposts/${id}`
+      `https://localhost:7296/api/blogposts/${id}?addAuth=true`
     );
   }
 

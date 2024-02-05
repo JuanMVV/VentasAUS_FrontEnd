@@ -16,7 +16,9 @@ export class CategoryService {
     private cookieService: CookieService) { }
 
   addCategory(model: AddCategoryRequest): Observable<void> {
-    return this.http.post<void>('https://localhost:7296/api/categories', model);
+    //2da forma con los intepceptores para indicarle al servicio que necesita pasarle el token, solo se agrega
+    //al final de la ruta ?addAuth=true, tal como esta declarado en el auth.interceptor.ts
+    return this.http.post<void>('https://localhost:7296/api/categories?addAuth=true', model);
   }
 
 
@@ -42,14 +44,16 @@ export class CategoryService {
     //     'Authorization': this.cookieService.get('Authorization')
     //   }});
 
-    return this.http.put<Category>(`https://localhost:7296/api/categories/${id}`, updateCategoryRequest);
+
+    //2da forma con los intepceptores
+    return this.http.put<Category>(`https://localhost:7296/api/categories/${id}?addAuth=true`, updateCategoryRequest);
 
 
-    
+
   }
 
   deleteCategory(id: string) : Observable<Category>{
-    return this.http.delete<Category>(`https://localhost:7296/api/categories/${id}`)
+    return this.http.delete<Category>(`https://localhost:7296/api/categories/${id}?addAuth=true`)
   }
 
 
