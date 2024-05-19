@@ -18,6 +18,8 @@ import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { jwtDecode } from 'jwt-decode';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    }    
   ],
   bootstrap: [AppComponent],
 })
